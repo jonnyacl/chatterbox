@@ -6,6 +6,7 @@
   "scripts": {
     "test": "LOGGING_ENABLED=false jest --runInBand",
     "build": "tsc",
+    "start": "node dist/main.js",
     "dev": "nodemon --watch '**/*.ts' --exec 'ts-node' src/main.ts | node_modules/.bin/pino-pretty"
   },
   "keywords": [],
