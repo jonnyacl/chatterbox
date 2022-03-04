@@ -7,7 +7,8 @@
     "test": "LOGGING_ENABLED=false jest --runInBand",
     "build": "tsc",
     "start": "node dist/main.js",
-    "dev": "nodemon --watch '**/*.ts' --exec 'ts-node' src/main.ts | node_modules/.bin/pino-pretty"
+    "docker-dev": "ts-node-dev --inspect=0.0.0.0:9229 src/main.ts",
+    "dev": "nodemon --watch '**/*.ts' --exec 'ts-node' src/main.ts"
   },
   "keywords": [],
   "author": "",
@@ -24,9 +25,9 @@
     "eslint": "7.32.0",
     "eslint-plugin-no-only-tests": "2.6.0",
     "nodemon": "^2.0.15",
-    "pino-pretty": "7.0.0",
     "ts-jest": "27.0.5",
     "ts-node": "10.2.1",
+    "ts-node-dev": "1.1.8",
     "typescript": "^4.5.5"
   },
   "lint-staged": {
@@ -37,6 +38,7 @@
     "axios": "^0.26.0",
     "cors": "^2.8.5",
     "express": "^4.17.3",
+    "firebase-admin": "^10.0.2",
     "query-string": "^7.1.1",
     "uuid": "^8.3.2",
     "uuidv4": "^6.2.12",
