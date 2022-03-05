@@ -31,5 +31,5 @@ jobs:
           ECR_REPOSITORY: chatterbox
           IMAGE_TAG: latest
         run: |
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker build --build-arg GOOGLE_KEY_VALUE=${{ secrets.GOOGLE_KEY }} -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG

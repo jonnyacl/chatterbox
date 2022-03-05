@@ -19,9 +19,9 @@ export const startServer = async (): Promise<http.Server> => {
   app.use(express.json());
   app.get('/ping', (req, res) => res.send('pong'));
   app.use(useAuth);
-  const server = app.listen(port, () =>
-    console.log(`Server is listening on ${port}`)
-  );
+  const server = app.listen(port, () => {
+    console.log(`Server is listening on ${port}`);
+  });
   server.on('upgrade', async (request: http.IncomingMessage, socket, head) => {
     try {
       const token = request.url.split('?access_token=')[1];

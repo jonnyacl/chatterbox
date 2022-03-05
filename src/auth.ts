@@ -16,7 +16,6 @@ export const useAuth = async (
   res: Response,
   next: NextFunction
 ): Promise<void> => {
-  console.log('req', req.method, req.url);
   if (req.headers.authorization) {
     const authorizer: Auth = getAuth();
     try {
