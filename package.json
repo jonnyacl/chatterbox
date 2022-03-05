@@ -11,7 +11,8 @@
     "docker:run": "docker run -dp 5009:5009 chatterbox",
     "docker-dev": "ts-node-dev --inspect=0.0.0.0:9229 src/main.ts",
     "dev": "nodemon --watch '**/*.ts' --exec 'ts-node' src/main.ts",
-    "keys": "./set-key.sh"
+    "keys": "./set-key.sh",
+    "google": "./createServices.sh"
   },
   "keywords": [],
   "author": "",
