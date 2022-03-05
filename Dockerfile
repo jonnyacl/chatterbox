@@ -12,7 +12,6 @@ COPY yarn.lock package.json ./
 
 RUN yarn install -s --prod --no-progress
 COPY ./dist/ .
-COPY ./service-account-file.json .
 
 RUN export GOOGLE_APPLICATION_CREDENTIALS="/app/dist/service-account-file.json"
 
