@@ -2,6 +2,8 @@ FROM node:16.13.1-alpine3.12
 
 ARG GOOGLE_KEY_VALUE
 
+RUN echo ${GOOGLE_KEY_VALUE}
+
 RUN adduser -HD -s /bin/sh 1000
 RUN apk add openssl curl
 
