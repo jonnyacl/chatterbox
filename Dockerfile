@@ -1,9 +1,5 @@
 FROM node:16.13.1-alpine3.12
 
-ARG GOOGLE_KEY_VALUE
-
-RUN echo ${GOOGLE_KEY_VALUE}
-
 RUN adduser -HD -s /bin/sh 1000
 RUN apk add openssl curl
 
@@ -16,9 +12,10 @@ COPY yarn.lock package.json ./
 
 RUN yarn install -s --prod --no-progress
 COPY ./dist/ .
+COPY ./google-services.json .
 
-ENV GOOGLE_KEY=$GOOGLE_KEY_VALUE
+ENV GOOGLE_APPLICATION_CREDENTIALS=/app/dist/google-services.json
 
 EXPOSE 5009
 
-CMD ["node", "src/main.js"]
+CMD ["node", "main.js"]

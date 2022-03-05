@@ -5,9 +5,9 @@
   "main": "dist/index.js",
   "scripts": {
     "test": "LOGGING_ENABLED=false jest --runInBand",
-    "build": "tsc",
+    "build": "rm -rf dist && tsc",
     "start": "node dist/main.js",
-    "docker:build": "docker build --build-arg GOOGLE_KEY_VALUE=$GOOGLE_KEY -t chatterbox .",
+    "docker:build": "docker build -t chatterbox .",
     "docker:run": "docker run -dp 5009:5009 chatterbox",
     "docker-dev": "ts-node-dev --inspect=0.0.0.0:9229 src/main.ts",
     "dev": "nodemon --watch '**/*.ts' --exec 'ts-node' src/main.ts",

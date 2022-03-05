@@ -32,5 +32,6 @@ jobs:
           IMAGE_TAG: latest
           GOOGLE_KEY: ${{ secrets.GOOGLE_KEY }}
         run: |
-          docker build --build-arg GOOGLE_KEY_VALUE='${GOOGLE_KEY}' -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          ./createServices.sh $GOOGLE_KEY
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
