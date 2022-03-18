@@ -13,7 +13,8 @@ export interface ConnectionRecord {
 }
 export const clients: Set<WebSocket> = new Set<WebSocket>();
 export const clientIDs: Record<string, ConnectionRecord> = {};
-export const messages: IMessage[] = [];
+export let messages: IMessage[] = [];
+const MAX_MESSAGES_LENGTH = 1000;
 
 export interface IChatterEvent {
   event: 'INITIAL_CONNECTION' | 'CHAT' | 'USER_JOIN';
@@ -85,6 +86,9 @@ export const chatter = (): WebSocket.Server => {
               name: user.userName,
               timestamp: new Date(),
             };
+            if (messages.length > MAX_MESSAGES_LENGTH) {
+              messages = messages.slice(MAX_MESSAGES_LENGTH * -1);
+            }
             messages.push(newMessage);
             const chatEvent: IChatterEvent = {
               event: 'CHAT',
