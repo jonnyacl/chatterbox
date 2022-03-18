@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "deploy": "sls"
+    "deploy": "sls deploy"
   },
   "dependencies": {
     "serverless": "^3.7.4"
