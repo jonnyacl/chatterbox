@@ -1,0 +1,49 @@
+service: chatterbox
+provider: aws
+
+resources:
+  Resources:
+    PodRole:
+      Type: AWS::IAM::Role
+      Properties: 
+        AssumeRolePolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            - Effect: Allow
+              Condition:
+                ArnLike:
+                  "aws:SourceArn": !Sub arn:aws:${AWS::Region}:${AWS::AccountId}:fargateprofile/chatterkube/*
+              Principal:
+                Service:
+                  - eks-fargate-pods.amazonaws.com
+              Action:
+                - 'sts:AssumeRole'
+        Description: Chatterbox pod execution role
+        ManagedPolicyArns: 
+          - arn:aws:iam::aws:policy/AmazonEKSFargatePodExecutionRolePolicy
+        RoleName: ChatterboxPodRole
+    VPC:
+      Type: AWS::EC2::VPC
+      Properties: 
+        CidrBlock: String
+    Subnet1:
+      Type: AWS::EC2::Subnet
+      Properties:
+        VpcId: Ref: VPC
+    KubeCluster:
+      Type: AWS::EKS::Cluster
+      Properties:
+        Name: chatterkube
+        ResourcesVpcConfig:
+          SubnetIds:
+            - Ref: Subnet1
+        RoleArn: String
+    FargateProfile:
+      Type: AWS::EKS::FargateProfile
+      Properties:
+        ClusterName: chatterkube
+        FargateProfileName: chatterboxfargate
+        PodExecutionRoleArn: Ref: PodRole
+        Selectors:
+          - Namespace: chatterbox
+
